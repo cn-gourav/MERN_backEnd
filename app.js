@@ -1,9 +1,26 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan')
 
-app.set("view engine" , 'ejs')
 
-app.get('/', (req,res) =>{
+app.use(morgan('dev'))
+
+app.set('view engine','ejs')
+
+app.use((req,res,next)=>{
+    console.log('this is middleware')
+    // res.send("this is middleware")
+    morgan(':method :url :status :res[content-length] - :response-time ms')
+    return next()
+})
+
+app.get('/', (req,res,next) =>{
+    const a = 5
+    const b = 6
+
+    console.log(a+b)
+    return next()
+} ,(req,res) =>{
     res.render('index')
 })
 
