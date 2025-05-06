@@ -33,6 +33,29 @@ const newUser =  await userModel.create({
   res.send(newUser);
 });
 
+app.get('/get-users', (req,res) => {
+    userModel.find().then((users) => {
+        // you can also findone method
+        // findone give null
+        res.send(users)
+    })
+})
+
+app.get('/update-user' ,async(req ,res) =>{
+    await userModel.findOneAndUpdate({
+        username: 'd'
+    },{
+        email:"cAfksdaf"
+    })
+    res.send("user update")
+})
+
+app.get('/delete-user',async (req,res) => {
+    await userModel.findOneAndDelete({
+        username: "d"
+    })
+    res.send('user-delete')
+})
 app.post("/get-form-data", (req, res) => {
   console.log(req.body);
   res.send("data received");
