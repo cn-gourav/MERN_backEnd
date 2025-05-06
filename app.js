@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan')
-
+const userModel = require('./models/user')
+const dbconnection = require('./config/db')
 
 app.use(morgan('dev'))
 app.use(express.json())
